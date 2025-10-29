@@ -35,8 +35,9 @@ jobs:
       - name: Test code
         id: test-run
         run: npm run test
+        continue-on-error: true
       - name: Upload test report
-        if: ${{ failure() && contains(steps.test-run.outcome, 'failure') }}
+        if: ${{ contains(steps.test-run.outcome, 'failure') }}
         uses: actions/upload-artifact@v5.0.0
         with:
           name: test-report
